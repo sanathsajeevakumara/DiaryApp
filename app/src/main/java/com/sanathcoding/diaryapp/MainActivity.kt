@@ -12,6 +12,8 @@ import androidx.navigation.compose.rememberNavController
 import com.sanathcoding.diaryapp.navigation.MainNavGraph
 import com.sanathcoding.diaryapp.navigation.Screen
 import com.sanathcoding.diaryapp.ui.theme.DiaryAppTheme
+import com.sanathcoding.diaryapp.util.Constant.APP_ID
+import io.realm.kotlin.mongodb.App
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,11 +27,17 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val navController = rememberNavController()
                     MainNavGraph(
-                        startDestination = Screen.Authentication.route,
+                        startDestination = autoStartDestination(),
                         navController = navController
                     )
                 }
             }
         }
     }
+}
+
+private fun autoStartDestination(): String {
+    val user = App.create(APP_ID).currentUser
+    return if (user != null && user.loggedIn) Screen.Home.route
+    else Screen.Authentication.route
 }

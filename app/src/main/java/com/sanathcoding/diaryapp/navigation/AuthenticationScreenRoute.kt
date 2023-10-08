@@ -9,11 +9,14 @@ import com.sanathcoding.diaryapp.presentation.screen.auth.AuthenticationViewMode
 import com.stevdzasan.messagebar.rememberMessageBarState
 import com.stevdzasan.onetap.rememberOneTapSignInState
 
-fun NavGraphBuilder.authenticationScreenRoute() {
+fun NavGraphBuilder.authenticationScreenRoute(
+    navigateToHome: () -> Unit
+) {
     composable(route = Screen.Authentication.route) {
 
         val authViewModel: AuthenticationViewModel = viewModel()
         val loadingState by authViewModel.loadingState
+        val authenticated by authViewModel.authenticated
         val oneTapState = rememberOneTapSignInState()
         val messageBarState = rememberMessageBarState()
 
@@ -21,6 +24,7 @@ fun NavGraphBuilder.authenticationScreenRoute() {
             loadingState = loadingState,
             oneTapState = oneTapState,
             messageBarState = messageBarState,
+            authenticated = authenticated,
             onButtonClicked = {
                 oneTapState.open()
                 authViewModel.updateLoading(true)
@@ -41,7 +45,8 @@ fun NavGraphBuilder.authenticationScreenRoute() {
             onDialogDismissed = { message ->
                 authViewModel.updateLoading(false)
                 messageBarState.addError(Exception(message))
-            }
+            },
+            navigateToHome = navigateToHome
         )
     }
 }

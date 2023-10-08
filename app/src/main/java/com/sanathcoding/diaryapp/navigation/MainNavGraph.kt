@@ -13,7 +13,12 @@ fun MainNavGraph(
         navController = navController,
         startDestination = startDestination
     ) {
-        authenticationScreenRoute()
+        authenticationScreenRoute(
+            navigateToHome = {
+                navController.popBackStack()
+                navController.navigate(Screen.Home.route)
+            }
+        )
         homeScreenRoute()
         writeScreenRoute()
     }
