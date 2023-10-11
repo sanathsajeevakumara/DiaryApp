@@ -19,7 +19,11 @@ fun MainNavGraph(
                 navController.navigate(Screen.Home.route)
             }
         )
-        homeScreenRoute()
+        homeScreenRoute(
+            navigateToWrite = {
+                navController.navigate(Screen.Write.route)
+            }
+        )
         writeScreenRoute()
     }
 }
