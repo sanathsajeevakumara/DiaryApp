@@ -1,4 +1,4 @@
-package com.sanathcoding.diaryapp.presentation.components
+package com.sanathcoding.diaryapp.presentation.screen.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -38,7 +38,7 @@ fun DiaryHeader(localDate: LocalDate) {
         Column(horizontalAlignment = Alignment.End) {
             Text(
                 text = localDate.month.toString().lowercase()
-                    .replaceFirstChar {it.titlecase()},
+                    .replaceFirstChar { it.titlecase() },
                 style = TextStyle(
                     fontSize = MaterialTheme.typography.titleLarge.fontSize,
                     fontWeight = FontWeight.Light
