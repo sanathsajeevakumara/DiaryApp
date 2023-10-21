@@ -1,5 +1,6 @@
 package com.sanathcoding.diaryapp.presentation.components
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -17,6 +18,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -44,17 +46,15 @@ import java.util.Locale
 fun DiaryHolder(diary: Diary, onClick: (String) -> Unit) {
 
     val localDensity = LocalDensity.current
-    var componentHeight by remember {
-        mutableStateOf(0.dp)
-    }
+    var componentHeight by remember { mutableStateOf(0.dp) }
+    var isGalleryOpened by remember { mutableStateOf(false) }
 
-    Row(
-        modifier = Modifier
-            .clickable(
-                indication = null,
-                interactionSource = remember { MutableInteractionSource() }
-            ) { onClick(diary._id.toString()) }
-    ) {
+    Row(modifier = Modifier.clickable(indication = null,
+        interactionSource = remember { MutableInteractionSource() }) {
+        onClick(
+            diary._id.toString()
+        )
+    }) {
         Spacer(modifier = Modifier.width(14.dp))
         Surface(
             modifier = Modifier
@@ -68,8 +68,7 @@ fun DiaryHolder(diary: Diary, onClick: (String) -> Unit) {
                 .clip(shape = Shapes().medium)
                 .onGloballyPositioned {
                     componentHeight = with(localDensity) { it.size.height.toDp() }
-                },
-            tonalElevation = Elevation.level1
+                }, tonalElevation = Elevation.level1
         ) {
             Column(modifier = Modifier.fillMaxWidth()) {
                 DiaryHeader(moodName = diary.mood, time = diary.date.toInstant())
@@ -80,6 +79,16 @@ fun DiaryHolder(diary: Diary, onClick: (String) -> Unit) {
                     maxLines = 4,
                     overflow = TextOverflow.Ellipsis
                 )
+                if (diary.images.isNotEmpty()) {
+                    ShowGalleryButton(
+                        galleryOpened = isGalleryOpened,
+                        onClick = { isGalleryOpened = !isGalleryOpened })
+                }
+                AnimatedVisibility(visible = isGalleryOpened) {
+                    Column(modifier = Modifier.padding(14.dp)) {
+                        Gallery(images = diary.images)
+                    }
+                }
             }
         }
     }
@@ -88,8 +97,7 @@ fun DiaryHolder(diary: Diary, onClick: (String) -> Unit) {
 
 @Composable
 fun DiaryHeader(
-    moodName: String,
-    time: Instant
+    moodName: String, time: Instant
 ) {
 
     val mood by remember { mutableStateOf(Mood.valueOf(moodName)) }
@@ -124,4 +132,16 @@ fun DiaryHeader(
         )
     }
 
+}
+
+@Composable
+fun ShowGalleryButton(
+    galleryOpened: Boolean, onClick: () -> Unit
+) {
+    TextButton(onClick = onClick) {
+        Text(
+            text = if (galleryOpened) "Hide Gallery" else "Open galley",
+            style = TextStyle(fontSize = MaterialTheme.typography.bodySmall.fontSize)
+        )
+    }
 }
