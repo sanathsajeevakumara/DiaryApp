@@ -1,5 +1,6 @@
 package com.sanathcoding.diaryapp.navigation
 
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
@@ -10,7 +11,8 @@ import com.stevdzasan.messagebar.rememberMessageBarState
 import com.stevdzasan.onetap.rememberOneTapSignInState
 
 fun NavGraphBuilder.authenticationScreenRoute(
-    navigateToHome: () -> Unit
+    navigateToHome: () -> Unit,
+    onDataLoaded: () -> Unit
 ) {
     composable(route = Screen.Authentication.route) {
 
@@ -19,6 +21,10 @@ fun NavGraphBuilder.authenticationScreenRoute(
         val authenticated by authViewModel.authenticated
         val oneTapState = rememberOneTapSignInState()
         val messageBarState = rememberMessageBarState()
+
+        LaunchedEffect(key1 = Unit) {
+            onDataLoaded()
+        }
 
         AuthenticationScreen(
             loadingState = loadingState,

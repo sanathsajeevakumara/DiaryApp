@@ -19,6 +19,9 @@ import com.sanathcoding.diaryapp.util.Constant.APP_ID
 import io.realm.kotlin.mongodb.App
 
 class MainActivity : ComponentActivity() {
+
+    var keepSplashOpened = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge(
@@ -26,7 +29,9 @@ class MainActivity : ComponentActivity() {
                 Color.Transparent.hashCode(), Color.Transparent.hashCode()
             )
         )
-        installSplashScreen()
+        installSplashScreen().setKeepOnScreenCondition {
+            keepSplashOpened
+        }
         setContent {
             DiaryAppTheme {
                 Surface(
@@ -36,7 +41,10 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     MainNavGraph(
                         startDestination = autoStartDestination(),
-                        navController = navController
+                        navController = navController,
+                        onDataLoaded = {
+                            keepSplashOpened = false
+                        }
                     )
                 }
             }

@@ -34,9 +34,7 @@ fun HomeTopBar(
         },
         actions = {
             IconButton(
-                onClick = {
-                    onMenuClicked()
-                },
+                onClick = {},
             ) {
                 Icon(
                     imageVector = Icons.Default.DateRange,

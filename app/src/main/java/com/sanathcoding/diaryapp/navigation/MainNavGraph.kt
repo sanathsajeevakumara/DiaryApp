@@ -7,7 +7,8 @@ import androidx.navigation.compose.NavHost
 @Composable
 fun MainNavGraph(
     startDestination: String,
-    navController: NavHostController
+    navController: NavHostController,
+    onDataLoaded: () -> Unit
 ) {
     NavHost(
         navController = navController,
@@ -17,12 +18,18 @@ fun MainNavGraph(
             navigateToHome = {
                 navController.popBackStack()
                 navController.navigate(Screen.Home.route)
-            }
+            },
+            onDataLoaded = onDataLoaded
         )
         homeScreenRoute(
             navigateToWrite = {
                 navController.navigate(Screen.Write.route)
-            }
+            },
+            navigateToAuth = {
+                navController.popBackStack()
+                navController.navigate(Screen.Authentication.route)
+            },
+            onDataLoaded = onDataLoaded
         )
         writeScreenRoute()
     }
