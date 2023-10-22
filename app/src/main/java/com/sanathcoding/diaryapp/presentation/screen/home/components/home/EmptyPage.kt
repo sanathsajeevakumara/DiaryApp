@@ -33,7 +33,7 @@ fun EmptyPage(
             )
         )
         Text(
-            text = title,
+            text = subTitle,
             style = TextStyle(
                 fontSize = MaterialTheme.typography.bodyMedium.fontSize,
                 fontWeight = FontWeight.Normal
