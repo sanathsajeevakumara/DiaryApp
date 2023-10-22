@@ -1,10 +1,9 @@
-package com.sanathcoding.diaryapp.presentation.screen.home
+package com.sanathcoding.diaryapp.presentation.screen.home.components.navigation
 
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.runtime.Composable
-import com.sanathcoding.diaryapp.presentation.screen.home.components.DrawerContent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

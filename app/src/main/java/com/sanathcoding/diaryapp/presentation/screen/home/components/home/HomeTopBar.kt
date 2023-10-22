@@ -1,4 +1,4 @@
-package com.sanathcoding.diaryapp.presentation.screen.home
+package com.sanathcoding.diaryapp.presentation.screen.home.components.home
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange

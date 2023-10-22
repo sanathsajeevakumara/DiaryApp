@@ -1,4 +1,4 @@
-package com.sanathcoding.diaryapp.presentation.screen.home
+package com.sanathcoding.diaryapp.presentation.screen.home.components.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import java.time.LocalDate
 
 @Composable
-fun DiaryHeader(localDate: LocalDate) {
+fun DateHeader(localDate: LocalDate) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Column(horizontalAlignment = Alignment.End) {
             Text(
@@ -59,5 +59,4 @@ fun DiaryHeader(localDate: LocalDate) {
 @Preview(showBackground = true)
 @Composable
 fun DateHeaderPreview() {
-    DateHeaderPreview()
 }

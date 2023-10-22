@@ -1,4 +1,4 @@
-package com.sanathcoding.diaryapp.presentation.screen.home.components
+package com.sanathcoding.diaryapp.presentation.screen.home.components.navigation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row

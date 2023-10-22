@@ -9,6 +9,9 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import com.sanathcoding.diaryapp.presentation.screen.home.components.home.HomeContent
+import com.sanathcoding.diaryapp.presentation.screen.home.components.home.HomeTopBar
+import com.sanathcoding.diaryapp.presentation.screen.home.components.navigation.HomeNavigationDrawer
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -36,7 +39,7 @@ fun HomeScreen(
                 }
             },
             content = {
-
+                HomeContent(diaryNotes = mapOf(), onClick = {})
             }
         )
     }
