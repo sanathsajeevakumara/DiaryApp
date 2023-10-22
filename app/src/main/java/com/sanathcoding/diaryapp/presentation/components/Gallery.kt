@@ -31,14 +31,15 @@ fun Gallery(
     modifier: Modifier = Modifier,
     images: List<String>,
     imageSize: Dp = 40.dp,
-    spaceBetween: Dp = 40.dp,
+    spaceBetween: Dp = 10.dp,
     imageShape: CornerBasedShape = Shapes().small
 ) {
     BoxWithConstraints {
         val numberOfVisibleImages = remember {
             derivedStateOf {
                 max(
-                    a = 0, b = this.maxWidth.div(imageSize + spaceBetween).toInt().minus(1)
+                    a = 0,
+                    b = this.maxWidth.div(spaceBetween + imageSize).toInt().minus(1)
                 )
             }
         }
@@ -53,7 +54,9 @@ fun Gallery(
                     modifier = modifier
                         .clip(imageShape)
                         .size(imageSize),
-                    model = ImageRequest.Builder(LocalContext.current).data(image).crossfade(true)
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(image)
+                        .crossfade(true)
                         .build(),
                     contentDescription = "Gallery Image"
                 )
