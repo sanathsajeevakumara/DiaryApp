@@ -31,6 +31,6 @@ fun MainNavGraph(
             },
             onDataLoaded = onDataLoaded
         )
-        writeScreenRoute()
+        writeScreenRoute(onBackPressed = { navController.popBackStack() })
     }
 }
