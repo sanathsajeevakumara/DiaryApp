@@ -25,6 +25,7 @@ import kotlinx.coroutines.withContext
 @OptIn(ExperimentalMaterial3Api::class)
 fun NavGraphBuilder.homeScreenRoute(
     navigateToWrite: () -> Unit,
+    navigateToWriteWithArgs: (String) -> Unit,
     navigateToAuth: () -> Unit,
     onDataLoaded: () -> Unit
 ) {
@@ -49,7 +50,8 @@ fun NavGraphBuilder.homeScreenRoute(
                     drawerState.open()
                 }
             },
-            navigateToWrite = navigateToWrite
+            navigateToWrite = navigateToWrite,
+            navigateToWriteWithArgs = navigateToWriteWithArgs,
         )
 
         DisplayAlertDialog(

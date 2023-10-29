@@ -14,8 +14,9 @@ import com.sanathcoding.diaryapp.presentation.screen.write.components.WriteTopAp
 fun WriteScreen(
     selectedDiary: Diary?,
     pagerState: PagerState,
+    uiState: UiState,
     onBackPressed: () -> Unit,
-    onDeleteConfirmClicked: () -> Unit
+    onDeleteConfirmClicked: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -28,9 +29,9 @@ fun WriteScreen(
         content = {
             WriteContent(
                 paddingValues = it,
-                title = "",
+                title = uiState.title,
                 onTitleChanged = {},
-                description = "",
+                description = uiState.description,
                 onDescriptionChanged = {},
                 pagerState = pagerState
             )

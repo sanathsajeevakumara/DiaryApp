@@ -25,6 +25,9 @@ fun MainNavGraph(
             navigateToWrite = {
                 navController.navigate(Screen.Write.route)
             },
+            navigateToWriteWithArgs = { diaryId ->
+                navController.navigate(Screen.Write.passDiaryId(diaryId))
+            },
             navigateToAuth = {
                 navController.popBackStack()
                 navController.navigate(Screen.Authentication.route)
