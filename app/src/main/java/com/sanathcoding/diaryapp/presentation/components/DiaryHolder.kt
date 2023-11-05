@@ -44,7 +44,7 @@ fun DiaryHolder(diary: Diary, onClick: (String) -> Unit) {
     Row(modifier = Modifier.clickable(indication = null,
         interactionSource = remember { MutableInteractionSource() }) {
         onClick(
-            diary._id.toString()
+            diary._id.toHexString()
         )
     }) {
         Spacer(modifier = Modifier.width(14.dp))

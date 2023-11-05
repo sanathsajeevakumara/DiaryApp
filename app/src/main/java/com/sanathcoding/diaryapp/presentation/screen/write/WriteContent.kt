@@ -1,6 +1,7 @@
 package com.sanathcoding.diaryapp.presentation.screen.write
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -42,8 +44,10 @@ fun WriteContent(
     title: String,
     onTitleChanged: (String) -> Unit,
     description: String,
+//    buttonColor: Color,
+//    buttonTextColor: Color,
     onDescriptionChanged: (String) -> Unit,
-    pagerState: PagerState
+    pagerState: PagerState,
 ) {
     val scrollState = rememberScrollState()
     Column(
@@ -124,10 +128,14 @@ fun WriteContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(54.dp),
+//                    .background(color = buttonColor),
                 onClick = { /*TODO*/ },
                 shape = Shapes().small
             ) {
-                Text(text = "Save")
+                Text(
+                    text = "Save",
+//                    style = TextStyle(color = buttonTextColor)
+                )
             }
         }
     }

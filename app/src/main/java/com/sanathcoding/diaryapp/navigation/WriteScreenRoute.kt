@@ -1,7 +1,9 @@
 package com.sanathcoding.diaryapp.navigation
 
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
@@ -31,10 +33,16 @@ fun NavGraphBuilder.writeScreenRoute(onBackPressed: () -> Unit) {
             Mood.values().size
         }
 
+        LaunchedEffect(key1 = true) {
+            Log.i("KeyId", "${uiState.selectedDiaryId}")
+        }
+
         WriteScreen(
             selectedDiary = null,
             pagerState = pagerState,
             uiState = uiState,
+            onTitleChanged = { viewModel.setTitle(title = uiState.title) },
+            onDescriptionChanged = { viewModel.setDescription(description = uiState.description) },
             onBackPressed = onBackPressed,
             onDeleteConfirmClicked = {}
         )
