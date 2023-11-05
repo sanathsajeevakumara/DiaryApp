@@ -14,9 +14,9 @@ import com.sanathcoding.diaryapp.presentation.screen.write.components.WriteTopAp
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun WriteScreen(
-    selectedDiary: Diary?,
     pagerState: PagerState,
     uiState: UiState,
+    moodName: () -> String,
     onTitleChanged: (String) -> Unit,
     onDescriptionChanged: (String) -> Unit,
     onBackPressed: () -> Unit,
@@ -28,7 +28,8 @@ fun WriteScreen(
     Scaffold(
         topBar = {
             WriteTopAppBar(
-                selectedDiary = selectedDiary,
+                selectedDiary = uiState.selectedDiary,
+                moodName = moodName,
                 onBackPressed = onBackPressed,
                 onDeleteConfirmClicked = onDeleteConfirmClicked
             )

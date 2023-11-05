@@ -7,6 +7,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sanathcoding.diaryapp.data.repository.MongoDB
+import com.sanathcoding.diaryapp.model.Diary
 import com.sanathcoding.diaryapp.model.Mood
 import com.sanathcoding.diaryapp.util.Constant.WRITE_SCREEN_ARGUMENT_KEY
 import com.sanathcoding.diaryapp.util.RequestState
@@ -41,11 +42,9 @@ class WriteViewModel(
             viewModelScope.launch(Dispatchers.Main) {
                 it.selectedDiaryId?.let { diaryId -> ObjectId.invoke(diaryId) }?.let {
                     MongoDB.getSelectedDiary(diaryId = it)
-                        .catch {
-                            emit(RequestState.Error(Exception("Diary is already deleted.")))
-                        }
                         .collect { diary ->
                             if (diary is RequestState.Success) {
+                                setSelectedDiary(diary = diary.data)
                                 setTitle(title = diary.data.title)
                                 setDescription(description = diary.data.description)
                                 setMood(mood = Mood.valueOf(diary.data.mood))
@@ -56,8 +55,9 @@ class WriteViewModel(
         }
     }
 
+    private fun setSelectedDiary(diary: Diary) { uiState = UiState().copy(selectedDiary = diary) }
     fun setTitle(title: String) { uiState = UiState().copy(title = title) }
     fun setDescription(description: String) { uiState = UiState().copy(description = description) }
-    fun setMood(mood: Mood) { uiState = UiState().copy(mood = mood) }
+    private fun setMood(mood: Mood) { uiState = UiState().copy(mood = mood) }
 
 }
